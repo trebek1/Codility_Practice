@@ -20,7 +20,7 @@ prefix_sums = function(A){
     return prefix; 
 }
 
- count_total = function(Prefix,start,end ){
+count_total = function(Prefix,start,end ){
     return Prefix[end+1] - Prefix[start]; 
 }
 
@@ -36,7 +36,7 @@ mushrooms = function(Array, start, moves){
         var right_pos = Math.min(length-1, Math.max(start, start+moves-2*i)); 
         result = Math.max(result, count_total(pref,left_pos, right_pos));
     }
-    console.log("This is result ", result);
+    
     for(var i=0; i<Math.min(moves+1,length-start); i++){
         
         var right_pos = start + i;
