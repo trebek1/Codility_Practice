@@ -11,7 +11,7 @@
 
 // Write a function to maximize her mushrooms. 
 
-prefix_sums = function(A){
+var prefix_sums = function(A){
     var length = A.length; 
     var prefix = Array.apply(null, Array(length)).map(Number.prototype.valueOf,0);
     for(k =1; k<=A.length; k++){
@@ -20,11 +20,11 @@ prefix_sums = function(A){
     return prefix; 
 }
 
-count_total = function(Prefix,start,end ){
+var count_total = function(Prefix,start,end ){
     return Prefix[end+1] - Prefix[start]; 
 }
 
-mushrooms = function(Array, start, moves){
+var mushrooms = function(Array, start, moves){
     
     var length = Array.length; 
     var result = 0; 
