@@ -54,3 +54,4 @@ function solution(X, A) {
     return -1; 
     // write your code in JavaScript (Node.js 0.12)
 }
+

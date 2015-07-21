@@ -72,3 +72,4 @@ function solution(A) {
     
     return smallest;  
 }
+
