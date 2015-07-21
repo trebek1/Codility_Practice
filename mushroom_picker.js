@@ -29,20 +29,18 @@ var mushrooms = function(Array, start, moves){
     var length = Array.length; 
     var result = 0; 
     pref = prefix_sums(Array);
-    
+
     for(var i =0; i<Math.min(start,moves)+1; i++){
         
         var left_pos = start - i; 
         var right_pos = Math.min(length-1, Math.max(start, start+moves-2*i)); 
         result = Math.max(result, count_total(pref,left_pos, right_pos));
     }
-    
     for(var i=0; i<Math.min(moves+1,length-start); i++){
         
         var right_pos = start + i;
         var left_pos = Math.max(0,Math.min(start,start-(moves-2*i))); 
-        result = Math.max(result, count_total(pref, left_pos, right_pos)); 
-            
+        result = Math.max(result, count_total(pref, left_pos, right_pos));         
     }    
     return result; 
 }
