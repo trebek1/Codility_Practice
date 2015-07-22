@@ -25,7 +25,7 @@ var factorization = function(x, preparedArray){
         primeFactors.push(preparedArray[x]); // push smallest 
         x/= preparedArray[x];
         
-        if(preparedArray[x]===0){
+        if(preparedArray[x]===0){ // make sure the number is actually a prime before pushing to primeFactors list
         primeFactors.push(x); 
          }
     
