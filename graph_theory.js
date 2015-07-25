@@ -7,19 +7,24 @@
 
 // get(a);
 
+
+// DICTIONARY (HASH TABLE)
 var Dictionary = function (){
     this.items = {};
     return this; 
 }
 
+//has(key): This returns true if the key exists in the dictionary and false otherwise.
 Dictionary.prototype.has = function(key){
     return key in this.items;
 };
 
+//set(key,value): This adds a new item to the dictionary.
 Dictionary.prototype.set = function(key, value){
-    this.items[key] = value; //{1}
+    this.items[key] = value; 
 };
 
+//remove(key): This removes the value from the dictionary using the key.
 Dictionary.prototype.remove = function(key){
     if (this.has(key)){
         delete this.items[key];
@@ -28,50 +33,55 @@ Dictionary.prototype.remove = function(key){
     return false;
 };
 
+//get(key): This returns a specific value searched by the key.
 Dictionary.prototype.get = function(key) {
     return this.has(key) ? this.items[key] : undefined;
 };
 
+//values(): This returns an array of all the values of the dictionary.
 Dictionary.prototype.values = function(){
     var values = [];
-    for (var k in items) { //{1}
+    for (var k in items) { 
         if (this.has(k)) {
-            this.values.push(items[k]); //{2}
+            this.values.push(items[k]); 
         }
     }
     return values;
 };
 
+// returns entire items variable 
 Dictionary.prototype.getItems = function(){
     return this.items;
 }
 
+// GRAPH DATA STRUCTURE 
 var Graph = function() {
-    this.vertices = []; //{1}
-    this.adjList = new Dictionary(); //{2}
+    this.vertices = []; 
+    this.adjList = new Dictionary(); 
     return this; 
 }
 
-
+// ADD A VERTEX TO THE GRAPH
 Graph.prototype.addVertex = function(v){
-    this.vertices.push(v); //{3}
-    this.adjList.set(v, []); //{4}
+    this.vertices.push(v); 
+    this.adjList.set(v, []); 
     
 };
 
+// ADD AN EDGE TO THE GRAPH 
 Graph.prototype.addEdge = function(v, w){
-    this.adjList.get(v).push(w); //{5}
-    this.adjList.get(w).push(v); //{6}
+    this.adjList.get(v).push(w); 
+    this.adjList.get(w).push(v); 
 };
 
 
 var graph = new Graph();
-var myVertices = ['A','B','C','D','E','F','G','H','I']; //{7}
+var myVertices = ['A','B','C','D','E','F','G','H','I']; 
 
-for (var i=0; i<myVertices.length; i++){ //{8}
+for (var i=0; i<myVertices.length; i++){ 
     graph.addVertex(myVertices[i]);
 }
-graph.addEdge('A', 'B'); //{9}
+graph.addEdge('A', 'B'); 
 graph.addEdge('A', 'C');
 graph.addEdge('A', 'D');
 graph.addEdge('C', 'D');
@@ -82,28 +92,34 @@ graph.addEdge('B', 'E');
 graph.addEdge('B', 'F');
 graph.addEdge('E', 'I');
 
+// TURN THE GRAPH INTO A STRING REPRESENTATION
 Graph.prototype.toString = function(){
     var s = '';
-    for (var i=0; i<this.vertices.length; i++){ //{10}
+    for (var i=0; i<this.vertices.length; i++){ 
         s += this.vertices[i] + ' -> ';
-        var neighbors = this.adjList.get(this.vertices[i]); //{11}
-        for (var j=0; j<neighbors.length; j++){ //{12}
+        var neighbors = this.adjList.get(this.vertices[i]); 
+        for (var j=0; j<neighbors.length; j++){ 
             s += neighbors[j] + ' ';
         }
-        s += '\n'; //{13}
+        s += '\n'; 
     }
     return s;
 };
 
+// LOG THE STRING TO THE CONSOLE TO SEE THE GRAPH 
 console.log(graph.toString());
+
+// LOOP THROUGH VERTICIES ARRAY PRINTING WHITE FOR EACH ENTRY
 
 Graph.prototype.initializeColor = function(){
     var color = [];
     for (var i=0; i<this.vertices.length; i++){
-        color[this.vertices[i]] = 'white'; //{1}
+        color[this.vertices[i]] = 'white'; 
     }
     return color;
 };
+
+// QUEUE IN JS 
 
 var Queue = function(){
 
@@ -138,16 +154,21 @@ var Queue = function(){
     };
 }
 
+// BFS IN JS : TAKES ROOT VERTICY IN VERTICY ARRAY IN V, CALLBACK IS FUNCTION TO PRINT OUT VISITED NODE 
 Graph.prototype.bfs = function(v, callback){
 
     var color = this.initializeColor(), 
         queue = new Queue();       
-    queue.enqueue(v);              
+   	// LOAD ROOT INTO QUEUE 
+   	 queue.enqueue(v);              
 
     while (!queue.isEmpty()){      
         var u = queue.dequeue(),        
+            // Looks at dictionary of Graph, if U is in graph, gets list of verticies 
             neighbors = this.adjList.get(u); 
+            // color grey since they were looked at 
         color[u] = 'grey';                      
+        // go through neighbors, turn grey and enqueue so that we can go through each of their neighbors if need be 
         for (var i=0; i<neighbors.length; i++){ 
             var w = neighbors[i];               
             if (color[w] === 'white'){      
@@ -155,6 +176,7 @@ Graph.prototype.bfs = function(v, callback){
                 queue.enqueue(w);               
             }
         }
+        // color black and send to callback to be printed out 
         color[u] = 'black'; 
         if (callback) {     
             callback(u);
@@ -162,12 +184,12 @@ Graph.prototype.bfs = function(v, callback){
     }
 };
 
-
+// where the vertex is printed 
 function printNode(value){ 
     console.log('Visited vertex: ' + value); 
 }
 
-
+// implementation of a stack 
 
 function Stack() {
 
@@ -202,29 +224,36 @@ function Stack() {
     };
 }
 
+// do a depth first search 
 Graph.prototype.dfs = function(callback){
-    var color = this.initializeColor(); //{1}
-
-    for (var i=0; i<this.vertices.length; i++){ //{2}
-        if (color[this.vertices[i]] === 'white'){ //{3}
-            this.dfsVisit(this.vertices[i], color, callback); //{4}
+    // initialize color which sets all nodes to white 
+    var color = this.initializeColor(); 
+    // go through verticies, if white, (not touched yet, call dfsVisit, after looping, callback used to print)
+    for (var i=0; i<this.vertices.length; i++){ 
+        if (color[this.vertices[i]] === 'white'){ 
+            this.dfsVisit(this.vertices[i], color, callback); 
         }
     }
 };
 
 Graph.prototype.dfsVisit = function(u, color, callback){
-    color[u] = 'grey'; //{5}
-    if (callback) {    //{6}
+    // color grey for visited
+    color[u] = 'grey'; 
+    // callback prints to screen
+    if (callback) {    
         callback(u);
     }
-    var neighbors = this.adjList.get(u);         //{7}
-    for (var i=0; i<neighbors.length; i++){ //{8}
-        var w = neighbors[i];               //{9}
-        if (color[w] === 'white'){          //{10}
-            this.dfsVisit(w, color, callback);   //{11}
+    // if neightbors get them
+    var neighbors = this.adjList.get(u);         
+    for (var i=0; i<neighbors.length; i++){ 
+        var w = neighbors[i];               
+    // loop through and if they havent been touched color them white 
+        if (color[w] === 'white'){          
+            this.dfsVisit(w, color, callback);   
         }
     }
-    color[u] = 'black'; //{12}
+    // after visit color them black 
+    color[u] = 'black'; 
 };
 
 console.log("BFS"); 
