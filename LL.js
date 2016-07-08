@@ -90,12 +90,16 @@ LL.prototype.delete = function(){
 var test = new LL(); 
 
 test.insert(5);
+test.insert(7); 
 test.insert(10);
 test.insert(15);
 test.insert(20);
 test.insert(50);
+test.insert(70);
+test.insert(80);
+test.insert(90);
 test.insert(100); 
-//test.insertCycle3(1337);
+test.insertCycle3(1337);
 
 //console.log("This is LL ", test); 
 
@@ -154,7 +158,8 @@ LL.prototype.nthEnd = function(num){
 LL.prototype.cycle = function(){
 
 	var slow = this.head, 
-		fast = this.head;
+		fast = this.head,
+		loop; 
 
 	while(slow && fast && fast.next && fast.next.next){
 		
@@ -163,10 +168,28 @@ LL.prototype.cycle = function(){
 
 		if(slow === fast){
 			console.log("There is a cycle! ");
-			return 1
+			loop = 1; 
+			break; 
 		}
+
 	}
+	
+	if(loop){
+
+		slow = this.head; 
+		while(slow !== fast){
+			console.log("This is slow ", slow);
+			console.log("This is fast ", fast);
+		
+			fast = fast.next; 
+			slow = slow.next; 
+		}
+		console.log("winner ", slow)
+		return slow; 
+	}
+
 	console.log("there is no cycle!"); 
+	loop = 0; 
 	return 0
 
 }
