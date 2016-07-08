@@ -95,7 +95,7 @@ test.insert(15);
 test.insert(20);
 test.insert(50);
 test.insert(100); 
-test.insertCycle3(1337);
+//test.insertCycle3(1337);
 
 //console.log("This is LL ", test); 
 
@@ -156,7 +156,8 @@ LL.prototype.cycle = function(){
 	var slow = this.head, 
 		fast = this.head;
 
-	if(slow && fast && fast.next && fast.next.next){
+	while(slow && fast && fast.next && fast.next.next){
+		
 		slow = slow.next; 
 		fast = fast.next.next; 
 
@@ -165,6 +166,7 @@ LL.prototype.cycle = function(){
 			return 1
 		}
 	}
+	console.log("there is no cycle!"); 
 	return 0
 
 }
