@@ -30,8 +30,9 @@ LL.prototype.insertCycle3 = function(val){
 		while(currentNode.next){
 			currentNode = currentNode.next;
 		}
-		currentNode.next = node; 
 		node.next = this.head.next.next.next; 
+		currentNode.next = node; 
+		
 	
 
 }
@@ -94,7 +95,7 @@ test.insert(15);
 test.insert(20);
 test.insert(50);
 test.insert(100); 
-test.insertCycle3(1337); 
+test.insertCycle3(1337);
 
 //console.log("This is LL ", test); 
 
@@ -150,7 +151,26 @@ LL.prototype.nthEnd = function(num){
 
 // Check for cycle 
 
+LL.prototype.cycle = function(){
 
+	var slow = this.head, 
+		fast = this.head;
+
+	if(slow && fast && fast.next && fast.next.next){
+		slow = slow.next; 
+		fast = fast.next.next; 
+
+		if(slow === fast){
+			console.log("There is a cycle! ");
+			return 1
+		}
+	}
+	return 0
+
+}
+
+
+test.cycle(); 
 
 
 
