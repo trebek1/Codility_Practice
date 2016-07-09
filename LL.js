@@ -99,7 +99,7 @@ test.insert(70);
 test.insert(80);
 test.insert(90);
 test.insert(100); 
-test.insertCycle3(1337);
+//test.insertCycle3(1337);
 
 //console.log("This is LL ", test); 
 
@@ -195,7 +195,36 @@ LL.prototype.cycle = function(){
 }
 
 
-test.cycle(); 
+//test.cycle(); 
+
+//reverse a linked list 
+
+LL.prototype.reverse = function(){
+	var nextNode,
+		node = this.head, 
+		temp = null; 
+	while(node !== null){
+		
+		nextNode = node.next; 
+		node.next = temp; 
+		temp = node; 
+		node = nextNode; 
+		console.log("This is node ", node);
+	}
+
+	this.head = temp; 
+	
+	//console.log(this.head.next.next); 
+	//console.log(this.head.next.next.next); 
+
+}
+
+console.log("This is test ", test); 
+
+test.reverse(); 
+
+console.log("This is the reversed List ", test.head);
+
 
 
 
