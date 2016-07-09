@@ -205,14 +205,14 @@ LL.prototype.reverse = function(){
 		temp = null; 
 	while(node !== null){
 		
-		nextNode = node.next; 
-		node.next = temp; 
-		temp = node; 
-		node = nextNode; 
+		nextNode = node.next; // save next node 
+		node.next = temp; // set next node equal to temp (null for first one)
+		temp = node; // set temp equal to the node you are at 
+		node = nextNode; // set node that you are at to next node 
 		console.log("This is node ", node);
 	}
 
-	this.head = temp; 
+	this.head = temp; // after going through nodes, reset the head of the LL to the new head located in temp (last temp is last value)
 	
 	//console.log(this.head.next.next); 
 	//console.log(this.head.next.next.next); 
