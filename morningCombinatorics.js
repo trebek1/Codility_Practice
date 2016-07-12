@@ -31,3 +31,28 @@ var findCombs = function(string){
 
 
 console.log("here are the combs for abc ", findCombs('abc'))
+
+var getPerms = function(string){
+	var permutations = [], 
+		newWord = [], 
+		newString = string + '',
+		chars = newString.split(''); 
+		
+		var permute = function(letters){
+			if(newWord.length > 0){
+				permutations.push(newWord.join());
+			}	
+			for(var i = 0; i<letters.length; i++){
+				letters.push(letters.shift());
+				newWord.push(letters[0]);
+				permute(letters.slice(1)); 
+				newWord.pop(); 
+			}
+		}
+		
+		permute(chars);
+		
+		return permutations; 
+}
+
+getPerms('123');
