@@ -257,7 +257,7 @@ Graph.prototype.dfsVisit = function(u, color, callback){
 };
 
 console.log("BFS"); 
-graph.bfs(this.myVertices[0], printNode); 
+graph.bfs(graph.vertices[0], printNode); 
 console.log(" ");
 console.log("DFS");
 graph.dfs(printNode);
