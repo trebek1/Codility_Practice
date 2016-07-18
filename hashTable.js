@@ -28,14 +28,6 @@ function HashTable(){
 
 }
 
-function simpleHash(data){
-	var total = 0; 
-	for(var i=0; i<data.length; i++){
-		total += data.charCodeAt(i); 
-	}
-	return total % this.table.length
-}
-
 function put(data){
 	var pos = this.betterHash(data); 
 	this.table[pos] = data;
@@ -49,6 +41,15 @@ function showDistro(){
 		}
 	}
 }
+
+function simpleHash(data){
+	var total = 0; 
+	for(var i=0; i<data.length; i++){
+		total += data.charCodeAt(i); 
+	}
+	return total % this.table.length
+}
+
 
 function betterHash(string){ 
 var H=31;
@@ -70,7 +71,6 @@ for (var i = 0; i < someNames.length; ++i){
 	hTable.put(someNames[i]);
 }
 
-hTable.showDistro();
 
 
 

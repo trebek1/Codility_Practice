@@ -44,7 +44,7 @@ var sieve = function(n){
         }
         
     }
-    console.log(final.length); // should be 168 primes below 1000
+    console.log(final); // should be 168 primes below 1000
     return final; 
 }
 
