@@ -17,14 +17,10 @@ var combinations = function (string)
 {
     var result = [];
 
-    var loop = function (start,depth,prefix)
-    {   
+    var loop = function (start,depth,prefix){   
 
-        for(var i=start; i<string.length; i++)
-        {
-            console.log("this is i ", i);
+        for(var i=start; i<string.length; i++){
             var next = prefix+string[i];
-            console.log("This is next ", next); 
             
             if (depth > 0){
                 loop(i+1,depth-1,next);
@@ -39,6 +35,7 @@ var combinations = function (string)
     for(var i=0; i<string.length; i++)
     {
         loop(0,i,'');
+        // start, depth, prefix
     }
 
     return result;

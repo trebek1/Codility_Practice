@@ -30,8 +30,9 @@ LL.prototype.insertCycle3 = function(val){
 		while(currentNode.next){
 			currentNode = currentNode.next;
 		}
-		node.next = this.head.next.next.next; 
 		currentNode.next = node; 
+		node.next = this.head.next.next.next; 
+		
 		
 	
 

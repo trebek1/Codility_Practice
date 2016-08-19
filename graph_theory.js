@@ -155,8 +155,8 @@ var Queue = function(){
 }
 
 // BFS IN JS : TAKES ROOT VERTICY IN VERTICY ARRAY IN V, CALLBACK IS FUNCTION TO PRINT OUT VISITED NODE 
-Graph.prototype.bfs = function(v, callback){
-
+Graph.prototype.bfs = function(callback){
+    var v = this.vertices[0]; 
     var color = this.initializeColor(), 
         queue = new Queue();       
    	// LOAD ROOT INTO QUEUE 
@@ -178,9 +178,9 @@ Graph.prototype.bfs = function(v, callback){
         }
         // color black and send to callback to be printed out 
         color[u] = 'black'; 
-        if (callback) {     
-            callback(u);
-        }
+        
+        callback(u);
+        
     }
 };
 
@@ -226,6 +226,7 @@ function Stack() {
 
 // do a depth first search 
 Graph.prototype.dfs = function(callback){
+    //console.log("what is this dfs ", this ); 
     // initialize color which sets all nodes to white 
     var color = this.initializeColor(); 
     // go through verticies, if white, (not touched yet, call dfsVisit, after looping, callback used to print)
@@ -240,9 +241,9 @@ Graph.prototype.dfsVisit = function(u, color, callback){
     // color grey for visited
     color[u] = 'grey'; 
     // callback prints to screen
-    if (callback) {    
-        callback(u);
-    }
+    
+    callback(u);
+    
     // if neightbors get them
     var neighbors = this.adjList.get(u);         
     for (var i=0; i<neighbors.length; i++){ 
@@ -257,7 +258,7 @@ Graph.prototype.dfsVisit = function(u, color, callback){
 };
 
 console.log("BFS"); 
-graph.bfs(graph.vertices[0], printNode); 
+graph.bfs(printNode); 
 console.log(" ");
 console.log("DFS");
 graph.dfs(printNode);

@@ -125,11 +125,8 @@ BinarySearchTree.prototype.postOrderTraversal = function(){
     this.root.postOrderTraversal();
 };
 
-
-// Gotta not hurt dat global namespace
 (function(){
 
-    // Example BinBinarySearchTree
     var bst = new BinarySearchTree(50);
     bst.insert(25);bst.insert(75);bst.insert(12);bst.insert(37);bst.insert(87);bst.insert(63);
 
