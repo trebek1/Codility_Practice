@@ -13,8 +13,7 @@
 
 // OR 
 
-var combinations = function (string)
-{
+var combinations = function (string){
     var result = [];
 
     var loop = function (start,depth,prefix){   
