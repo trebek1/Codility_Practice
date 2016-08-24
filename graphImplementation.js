@@ -56,19 +56,55 @@ Graph.prototype.toString = function(){
 		}
 		s+= '\n';
 	}
-	
 	return s; 
 };
 
 console.log(graph.toString());
 
+Graph.prototype.color = function(){
 
+	var color = []; 
+	
+	for(var i = 0; i<this.verticies.length; i++){
+		color[this.verticies[i]] = 'white'; 
+	}
+	
+	return color; 
+	
+};
 
+Graph.prototype.bfs = function(callback){
+	// here is the root
+	var v = this.verticies[0],
+		color = this.color(), 
+		queue = []; 
+	
+	queue.push(v); 
+	
+	while(queue.length > 0){
+		var node = queue.shift(), 
+			neighbors = this.adjList[node];
+		
+		color[node] = 'grey'; 
+		
+		for(var i = 0; i<neighbors.length; i++){
+			var x = neighbors[i]; 
+			if(color[x] === 'white'){
+				color[x] = 'grey';
+				queue.push(x);
+			}
+			
+		}
+		color[node] = 'black'; 
+		callback(node); 
+	}
+};
 
+// this is the callback
+function printNode(value){ 
+    console.log('Visited vertex: ' + value); 
+}
 
-
-
-
-
-
-
+console.log("BFS"); 
+graph.bfs(printNode); 
+console.log(" ");
