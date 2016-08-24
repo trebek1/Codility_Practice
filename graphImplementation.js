@@ -73,6 +73,8 @@ Graph.prototype.color = function(){
 	
 };
 
+//BFS 
+
 Graph.prototype.bfs = function(callback){
 	// here is the root
 	var v = this.verticies[0],
@@ -108,3 +110,38 @@ function printNode(value){
 console.log("BFS"); 
 graph.bfs(printNode); 
 console.log(" ");
+
+// Now for DFS 
+
+Graph.prototype.dfs = function(callback){
+	var color = this.color(); 
+	
+	for(var i = 0; i<this.verticies.length; i++){
+		var v = this.verticies[i];
+		if(color[v] === 'white'){
+			this.dfsVisit(v,color,callback);
+		}
+	}
+};
+
+Graph.prototype.dfsVisit = function(u, color, callback){
+	color[u] = 'grey'; 
+	callback(u); 
+	
+	var neighbors = this.adjList[u];
+	
+	for(var i = 0; i<neighbors.length; i++){
+		var w = neighbors[i];
+		if(color[w] === 'white'){
+			this.dfsVisit(w,color,callback);
+		}
+	}
+	color[u] = 'black';
+	
+};
+
+console.log("DFS");
+graph.dfs(printNode);
+
+
+
